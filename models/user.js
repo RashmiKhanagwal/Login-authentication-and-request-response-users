@@ -27,7 +27,6 @@ const userSchema = new mongoose.Schema(
         },
         dateOfJoining: {
             type: Date,
-            required: true
         }
     },
     { timestamps: true }

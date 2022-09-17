@@ -5,16 +5,17 @@ const jwtSecret = "4715aed3c946f7b0a38e6b534a9583628d84e96d10fbc04700770d572af3d
 
 
 exports.register = async(req,res) => {
+    const { username,email,password,role,contact,dateOfJoining } = req.body;
     try{
         const salt = await bcrypt.genSalt(10);
-        const hashedPass = await bcrypt.hash(req.body.password, salt);
+        const hashedPass = await bcrypt.hash(password, salt);
         await User.create({
-            username: req.body.username,
-            email: req.body.email,
+            username,
+            email,
             password: hashedPass,
-            role: req.body.role,
-            contact: req.body.contact,
-            dateOfJoining: req.body.dateOfJoining
+            role,
+            contact,
+            dateOfJoining
         })
         .then((user) => {
             const maxAge = 3*60*60;
