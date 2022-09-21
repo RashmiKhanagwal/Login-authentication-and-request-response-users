@@ -14,7 +14,10 @@ exports.sendDocument = async(req,res) => {
         const request = await Request.findByIdAndUpdate(
             req.params.id,
             {
-                $set: req.body
+                $set: {
+                    "status": req.body.status,
+                    "docfile": req.file.filename
+                }
             },
             {new:true}
         );
@@ -22,7 +25,8 @@ exports.sendDocument = async(req,res) => {
     }catch(err){
         res.status(500).json(err);
     }
-}
+};
+
 
 
 
